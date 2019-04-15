@@ -17,20 +17,42 @@
     $stateProvider.state('app', {
       abstract:true,
       url: '/app',
-      template: '<div class="container" ui-view></div>',
+      templateUrl: 'app/app.html',
       controller: 'AppController',
-      controllerAs: 'app'
+      // resolve:{
+      //   login:["ngCookies","$state",function(ngCookies,$state){
+          
+      //     if(ngCookies.get("token")){
+      //       $state.go("login");
+      //       return false;
+      //     }
+
+      //   }]
+      // }
     })
       .state('app.main', {
         url: '/main',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
-      }).state('app.detail', {
-        url: '/detail?id',
-        templateUrl: 'app/detail/detail.html',
-        controller: 'DetailController',
-        controllerAs: 'detail'
+        views:{
+          top:{
+            templateUrl: 'app/main/top.html',
+            controller: 'TopController',
+            
+          },
+          left:{
+            templateUrl: 'app/main/left.html',
+            controller: 'LeftController',
+            
+          },
+          chatList:{
+            templateUrl: 'app/main/chatList.html',
+            controller: 'ChatListController',
+          },
+          sendBox:{
+            templateUrl: 'app/main/sendBox.html',
+            controller: 'SendBoxController',
+          },
+        }
+        
       });
 
     $urlRouterProvider.otherwise('/login');

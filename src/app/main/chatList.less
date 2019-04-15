@@ -1,0 +1,60 @@
+.chat-list {
+  padding:20px 10px ;
+  
+  .chat-record {
+    overflow: hidden;
+    
+    .chat-header,.chat-body{
+      float:left;
+    }
+    margin-bottom: 20px;
+    // padding: 0 20px;
+    .msg-image{
+      max-width:200px;
+      max-height:200px;
+      border-radius: 6px;
+    }
+    // &:after{
+    //   content:"";
+    //   clear:both;
+    // }
+    .chat-header{
+      margin:0 10px;
+    }
+    .chat-body{
+      // 气泡，左边
+      .chat-wrapper{
+        background-color:#337ab7;
+        color:white;
+        padding:10px;
+        border-radius: 6px;
+
+      }
+    }
+  }
+
+  .from-fans {
+
+    .chat-header,
+    .chat-body {
+      float: right;
+    }
+    .chat-body{
+      // 气泡，右边
+      .chat-wrapper{
+        background-color:white;
+        color:#337ab7;
+      }
+    }
+  }
+}
+
+.chat-avatar {
+
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-repeat: no-repeat;
+  background-size:cover;
+  background-position: center;
+}

@@ -1,0 +1,9 @@
+<div class="audio-in-msg-list" ng-style="{width:getWidth()}" ng-click="clickAudio()">
+  <div ng-class="{'audio-img-left':float=='left'
+  ,'audio-img-right':float=='right'}">
+    <img ng-src="{{imgSrc}}"/>
+  </div>
+    <span ng-class="{'audio-seconds-left':float=='left'
+  ,'audio-seconds-right':float=='right'}">{{options.time}}s</span>
+  <audio ng-src="{{convertUrl(options.url)}}" style="display:none"></audio>
+</div>

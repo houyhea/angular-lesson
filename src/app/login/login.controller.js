@@ -6,44 +6,32 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController($scope,$timeout, webDevTec, toastr, $http) {
-    var vm = this;
+  function LoginController($rootScope,$scope,$timeout, webDevTec, toastr, $http,$state,$cookies) {
+      $scope.input={
+        userName:"",
+        pwd:""
+      };
+      $scope.clickLogin=function(){
+        var ret=checkInput();
+        if(ret){
+          toastr.error(ret,null,{preventDuplicates:false});
 
-    vm.awesomeThings = [];
-    vm.classAnimation = '';
-    vm.creationDate = 1513905924457;
-    vm.showToastr = showToastr;
-    
-    activate();
-
-    function activate() {
-      getWebDevTec();
-      $timeout(function () {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
-    }
-
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-      vm.classAnimation = '';
-    }
-
-    function getWebDevTec() {
-      vm.awesomeThings = webDevTec.getTec();
-
-      angular.forEach(vm.awesomeThings, function (awesomeThing) {
-        awesomeThing.rank = Math.random();
-      });
-    }
-
-
-    function testApiCall() {
-      $http.get('/api/shop/list').then(function (data) {
-        console.log(data);
-      }, function () {
-        console.log("error");
-      });
-    }
-    testApiCall();
+          return;
+        }
+        $cookies.put("token","xxxx");
+        $rootScope.user={
+          userName:$scope.input.userName
+        };
+        $state.go("app.main");
+      }
+      function checkInput(){
+        if(!$scope.input.userName){
+          return "请输入用户名";
+        }
+        if(!$scope.input.pwd){
+          return "请输入密码";
+        }
+        return "";
+      }
   }
 })();

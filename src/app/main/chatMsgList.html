@@ -1,0 +1,128 @@
+<ul class="chat-msg-list">
+  <li ng-repeat="msg in msgList track by $index" class="clearfix">
+    <div class="chat-msg-time" ng-show="isTimeShow(msg,$index)"><span>{{msg.time|msDateFormat:msg.timeFormat}}</span>
+    </div>
+    <!-- 聊天消息-->
+    <div ng-if="msg.msg.type!='transfer'" class="msg-item-con">
+      <img class="img-circle header " title="{{msg.userInfo.name}}" ng-class="{'pull-left':msg.userInfo.fans,'pull-right':!msg.userInfo.fans,'img-gray':!$root.onlineStatus}"
+        ng-src="{{!msg.userInfo.head?(msg.userInfo.fans?'/app/assets/images/fansHeadDefault.png':'/app/assets/images/cusHeadDefault.png'):msg.userInfo.head}}"
+        error-src="{{msg.userInfo.fans?'/app/assets/images/fansHeadDefault.png':'/app/assets/images/cusHeadDefault.png'}}"
+      />
+
+
+      <!-- 文本-->
+      <div ng-if="msg.msg.type=='text'" ng-class="{'msg-content-left':msg.userInfo.fans,'msg-content-right':!msg.userInfo.fans}">
+        <div ng-class="{'msg-pop-left':msg.userInfo.fans,'msg-pop-right':!msg.userInfo.fans}">
+          <span class="trigger"></span> <em class="trigger-em"></em>
+          <span class="chat-msg-text">
+            <!-- 内容-->
+            <!--{{msg.msg.message|imEmotion}}-->
+          <!-- <span ng-bind-html="emotion(msg.msg.message)"></span>
+          </span> -->
+          <span im-msg-formater="msg.msg.message"></span>
+          </span>
+
+          </span>
+          <!-- 内容-->
+          <div ng-if="msg.statusTip" class="msg-status-tip">
+            <img ng-show="msg.msgStatus=='loading'" class="status-tip-loading" src="/app/assets/images/loading/loading5.gif" />
+            <img title="{{msg.errMsg}}" ng-show="msg.msgStatus=='failure'" ng-click="clickReSendText(msg)" class="status-tip-failure"
+              src="/app/assets/images/failure-icon.png" />
+          </div>
+        </div>
+      </div>
+      <!-- 图片-->
+      <div ng-if="msg.msg.type=='image'" ng-class="{'msg-content-left':msg.userInfo.fans,'msg-content-right':!msg.userInfo.fans}">
+
+
+        <div ng-class="{'msg-pop-left':msg.userInfo.fans,'msg-pop-right':!msg.userInfo.fans}">
+          <span class="trigger"></span> <em class="trigger-em"></em>
+          <!-- 内容-->
+          <img fresco-img fresco-con="chat-msg-list" fresco-con-img="preview-img" class="msg-img preview-img" ng-src="{{msg.msg.message.url}}"
+          />
+          <!-- 内容-->
+
+          <div ng-if="msg.statusTip" class="msg-status-tip">
+            <img ng-show="msg.msgStatus=='loading'" class="status-tip-loading" src="/app/assets/images/loading/loading5.gif" />
+            <img title="{{msg.errMsg}}" ng-show="msg.msgStatus=='failure'" ng-click="clickReSendImage(msg)" class="status-tip-failure"
+              src="/app/assets/images/failure-icon.png" />
+          </div>
+        </div>
+
+      </div>
+      <!-- 语音-->
+      <div ng-if="msg.msg.type=='voice'" ng-class="{'msg-content-left':msg.userInfo.fans,'msg-content-right':!msg.userInfo.fans}">
+        <div ng-class="{'msg-pop-left':msg.userInfo.fans,'msg-pop-right':!msg.userInfo.fans}">
+          <span class="trigger"></span> <em class="trigger-em"></em>
+          <!-- 消息内容-->
+          <div audio-in-msg-list options="msg.msg.message" msg="msg" float="{{msg.userInfo.fans?'left':'right'}}"></div>
+          <!-- 消息内容-->
+          <div ng-if="msg.statusTip" class="msg-status-tip">
+            <img ng-show="msg.msgStatus=='loading'" class="status-tip-loading" src="/app/assets/images/loading/loading5.gif" />
+            <img title="{{msg.errMsg}}" ng-show="msg.msgStatus=='failure'" ng-click="clickReSendVoice(msg)" class="status-tip-failure"
+              src="/app/assets/images/failure-icon.png" />
+
+          </div>
+        </div>
+      </div>
+      <!-- 视频-->
+      <div ng-if="msg.msg.type=='video'" ng-class="{'msg-content-left':msg.userInfo.fans,'msg-content-right':!msg.userInfo.fans}">
+        <div ng-class="{'msg-pop-left':msg.userInfo.fans,'msg-pop-right':!msg.userInfo.fans}">
+          <span class="trigger"></span> <em class="trigger-em"></em>
+          <!-- 消息内容-->
+          <div video-in-msg-list options="msg.msg.message" msg="msg"></div>
+          <!-- 消息内容-->
+          <div ng-if="msg.statusTip" class="msg-status-tip">
+            <img ng-show="msg.msgStatus=='loading'" class="status-tip-loading" src="/app/assets/images/loading/loading5.gif" />
+            <img title="{{msg.errMsg}}" ng-show="msg.msgStatus=='failure'" ng-click="clickReSendVideo(msg)" class="status-tip-failure"
+              src="/app/assets/images/failure-icon.png" />
+          </div>
+        </div>
+      </div>
+      <!-- 商品\单图文、多图文-->
+      <div ng-if="msg.msg.type=='goods'||msg.msg.type=='tuwen'" ng-class="{'msg-content-left':msg.userInfo.fans,'msg-content-right':!msg.userInfo.fans}">
+        <div ng-class="{'msg-pop-left':msg.userInfo.fans,'msg-pop-right':!msg.userInfo.fans}">
+          <span class="trigger"></span> <em class="trigger-em"></em>
+          <!-- 消息内容-->
+          <div tuwen-in-msg-list options="msg.msg.message" hide-desc="msg.msg.type=='goods'"></div>
+          <!-- 消息内容-->
+          <div ng-if="msg.statusTip" class="msg-status-tip">
+            <img ng-show="msg.msgStatus=='loading'" class="status-tip-loading" src="/app/assets/images/loading/loading5.gif" />
+            <img title="{{msg.errMsg}}" ng-show="msg.msgStatus=='failure'" ng-click="clickReSendGoodsOrTuwen(msg)" class="status-tip-failure"
+              src="/app/assets/images/failure-icon.png" />
+          </div>
+        </div>
+      </div>
+    <!--文件-->
+    <div ng-if="msg.msg.type=='file'" ng-class="{'msg-content-left':msg.userInfo.fans,'msg-content-right':!msg.userInfo.fans}">
+        <div ng-class="{'msg-pop-left':msg.userInfo.fans,'msg-pop-right':!msg.userInfo.fans}">
+          <span class="trigger"></span> <em class="trigger-em"></em>
+          <!-- 内容-->
+          <a ng-href="{{msg.msg.message.url}}" target="_blank">
+            <div class="fileType">
+              <img ng-src="/app/assets/images/word.png" ng-if="msg.msg.message.type==1"/>
+              <img ng-src="/app/assets/images/pdf.png" ng-if="msg.msg.message.type==2"/>
+              <img ng-src="/app/assets/images/excel.png" ng-if="msg.msg.message.type==3"/>
+              <img ng-src="/app/assets/images/ppt.png" ng-if="msg.msg.message.type==4"/>
+              <span>
+                <div class="fileName">{{msg.msg.message.fileName}}</div>
+                <div class="fileSize">{{msg.msg.message.size | formatBytes}}</div>
+              </span>
+            </div>
+          </a>
+          <!-- 内容-->
+
+          <div ng-if="msg.statusTip" class="msg-status-tip">
+            <img ng-show="msg.msgStatus=='loading'" class="status-tip-loading" src="/app/assets/images/loading/loading5.gif" />
+            <img title="{{msg.errMsg}}" ng-show="msg.msgStatus=='failure'" ng-click="clickReSendFile(msg)" class="status-tip-failure"
+              src="/app/assets/images/failure-icon.png" />
+          </div>
+        </div>
+
+    </div>
+    <!-- 转接-->
+    <div ng-if="msg.msg.type=='transfer'" class="msg-item-con text-center">
+      <span class="msg-system-tip">转出客服:{{msg.msg.message.data.outCusName?msg.msg.message.data.outCusName:"无"}},留言:{{msg.msg.message.data.mark?msg.msg.message.data.mark:"无"}}</span>
+    </div>
+  </li>
+</ul>

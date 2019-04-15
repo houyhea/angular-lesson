@@ -1,0 +1,22 @@
+<div class="chat-list">
+  <div ng-repeat="item in $root.chatRecords track by $index" class="chat-record" ng-class="{'from-fans':item.fromFans}">
+    <div class="chat-header"><div class="chat-avatar" ng-style="{'background-image':'url({{item.content.userInfo.head}})'}"></div></div>
+    <div class="chat-body">
+
+      <div class="chat-wrapper" ng-if="item.msgType=='text'">
+        {{item.content.body.message}}
+      </div>
+
+      <div class="chat-wrapper" ng-if="item.msgType=='image'">
+          <img class="msg-image" ng-src="{{item.content.body.message.url}}" alt="">
+      </div>
+
+      <div class="chat-wrapper" ng-if="item.msgType=='video'">
+          {{item.content.body.message.url}}
+      </div>
+      <div class="chat-wrapper" ng-if="item.msgType=='voice'">
+        {{item.content.body.message.url}}
+    </div>
+    </div>
+  </div>
+</div>
