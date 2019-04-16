@@ -1,0 +1,11 @@
+<div class="video-in-msg-list"  ng-mouseenter="mouseEnter=true" ng-mouseleave="mouseEnter=false">
+
+  <video>
+    <source ng-src="{{options.url}}" type="video/mp4">
+
+  </video>
+  <div class="control-bg" ng-show="mouseEnter||!playing"   onselectstart="return false" style="-moz-user-select:none;">
+  <img class="control-btn" ng-src="{{!playing?'/app/assets/images/videoPlay.png':'/app/assets/images/videoPause.png'}}"  ng-click="controlBtnClick()"/>
+  
+</div>
+</div>

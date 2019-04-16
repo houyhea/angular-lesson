@@ -19,16 +19,18 @@
       url: '/app',
       templateUrl: 'app/app.html',
       controller: 'AppController',
-      // resolve:{
-      //   login:["ngCookies","$state",function(ngCookies,$state){
-          
-      //     if(ngCookies.get("token")){
-      //       $state.go("login");
-      //       return false;
-      //     }
-
-      //   }]
-      // }
+      resolve:{
+        
+        login: function ($cookies,$rootScope,$state,toastr) { 
+          if(!$rootScope.user)
+          {
+            toastr.info("登录失效，请重新登录");
+            throw {type:"token-invalid"};
+          }
+          return true;
+        } 
+    
+      }
     })
       .state('app.main', {
         url: '/main',

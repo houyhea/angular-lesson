@@ -12,10 +12,12 @@
       </div>
 
       <div class="chat-wrapper" ng-if="item.msgType=='video'">
-          {{item.content.body.message.url}}
+          <!-- {{item.content.body.message.url}} -->
+          <div video-in-msg-list options="item.content.body.message"></div>
       </div>
       <div class="chat-wrapper" ng-if="item.msgType=='voice'">
-        {{item.content.body.message.url}}
+        <div audio-in-msg-list msg="item.content.body.message"></div>
+        <!-- {{item.content.body.message.url}} -->
     </div>
     </div>
   </div>

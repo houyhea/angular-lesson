@@ -17,7 +17,7 @@
       var newMsg = {
         id: 1900,
         content: {
-          msgId: pc + new Date().getTime(),
+          msgId: "pc" + new Date().getTime(),
           userInfo: {
             name: "coco",
             userId: "1000_1578",

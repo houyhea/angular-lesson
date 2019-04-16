@@ -1,0 +1,50 @@
+.video-in-msg-list {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+
+  video {
+    // min-width:100px;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .control-bg {
+    cursor:pointer;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: black;
+    opacity: 0.4;
+
+    .control-btn {
+      outline: none;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      position: absolute;
+      top: 50%;
+      margin-top: -18px;
+      left: 50%;
+      margin-left: -18px;
+      z-index: 10;
+    }
+    .download_btn{
+      position: absolute;
+      width: 24px;
+      right: 8px;
+      bottom: 8px;
+      z-index: 10;
+    }
+
+    .video-play {
+      background: url("/app/assets/images/videoPlay.png");
+    }
+
+    .video-pause {
+      background: url("/app/assets/images/videoPause.png");
+    }
+  }
+}
