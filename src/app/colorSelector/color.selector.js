@@ -11,6 +11,9 @@ angular.module('demo').directive('colorSelector', ['$rootScope', '$interval', 'U
       templateUrl:"/app/colorSelector/color.dir.html",
       link: function (scope, element, attrs,ngModel) {
         scope.colorList=["red","yellow","blue"];
+        scope.result={
+          currentColor:""
+        };
         /**
          * 通过ngModel.$setViewValue  ngModel.$render 实现双向绑定闭环。
          * 然后外部就可以按照<div color-selector ng-model="color"></div>的形式使用。
@@ -21,6 +24,7 @@ angular.module('demo').directive('colorSelector', ['$rootScope', '$interval', 'U
            * 调用该方法，设置ngModeld $viewValue
            */
           ngModel.$setViewValue(color);
+          scope.result.currentColor=color;
         }
         /**
          * 要自己实现ngModel.$render方法，主要就是根据$modelValue，自己决定如何渲染界面。
@@ -30,7 +34,7 @@ angular.module('demo').directive('colorSelector', ['$rootScope', '$interval', 'U
 
         };
         function setContent(value){
-          scope.currentColor=value;
+          scope.result.currentColor=value;
         }
       }
     };
