@@ -1,0 +1,6 @@
+<div class="color-selector">
+  
+  <div ng-click="itemClick(color)" class="color-item" ng-repeat="color in colorList track by $index" ng-class="{'active-color':color==currentColor}" style="background-color:{{color}}">
+    
+  </div>
+</div>

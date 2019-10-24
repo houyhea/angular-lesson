@@ -13,7 +13,16 @@
       controller: 'LoginController',
       controllerAs: 'login'
     });
-
+    $stateProvider.state('angular', {
+      url: '/angular',
+      templateUrl: 'app/angular/angular.html',
+      controller: 'angularController'
+    });
+    $stateProvider.state('color', {
+      url: '/color',
+      templateUrl: 'app/colorSelector/color.html',
+      controller: 'colorController'
+    });
     $stateProvider.state('app', {
       abstract:true,
       url: '/app',
